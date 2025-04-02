@@ -178,14 +178,6 @@ function App() {
               <div
                 className={`flex justify-center flex-col gap-4 items-center my-2 lg:mt-10 mb-4 mx-`}
               >
-                <p
-                  className={`text-[0.64rem] lg:text-lg font-semibold bg-[var(--box-bg)] p-5 rounded-xl border-2 transition-all duration-300 ${
-                    copied ? "border-green-500" : "border-[var(--box-bg)]"
-                  }`}
-                  ref={fenRef}
-                >
-                  {fen}
-                </p>
                 <div className="flex flex-col gap-4 lg:flex-row">
                   <div className="flex gap-10">
                     <button
@@ -247,6 +239,14 @@ function App() {
                     </button>
                   </div>
                 </div>
+                <p
+                  className={`text-[0.64rem] lg:text-lg font-semibold bg-[var(--box-bg)] p-5 rounded-xl border-2 transition-all duration-300 ${
+                    copied ? "border-green-500" : "border-[var(--box-bg)]"
+                  }`}
+                  ref={fenRef}
+                >
+                  {fen}
+                </p>
               </div>
             )}
           </div>

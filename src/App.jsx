@@ -86,11 +86,11 @@ function App() {
 
   return (
     <div className="App flex flex-col justify-center items-center">
-      <header className="w-full py-6 text-center text-4xl bg-[var(--bg)]  font-semibold rounded-b-xl">
+      <header className="w-full py-3 text-center text-2xl bg-[var(--bg)]  font-semibold rounded-b-xl">
         <p className="chessFen">ChessFEN</p>
       </header>
 
-      <div className="flex flex-col px-12 md:flex-row w-screen items-center ">
+      <div className="flex flex-col px-8 lg:px-12 md:flex-row w-screen  ">
         <ImageProcessor
           isBoardLoaded={isBoardLoaded}
           setIsBoardLoaded={setIsBoardLoaded}
@@ -102,12 +102,12 @@ function App() {
         />
 
         {/* options */}
-        <div className="flex-1 flex justify-center">
-          <div className="options-div flex flex-col justify-center gap-6 items-center max-w-1/2">
+        <div className="flex-1 flex justify-center h-fit lg:mt-14">
+          <div className="options-div flex flex-col justify-center gap-6 items-center my-4 lg:my-0">
             {/* to play */}
-            <div className="toPlay-div flex gap-10 items-center justify-between w-full">
+            <div className="toPlay-div flex gap-10 items-center justify-center w-full">
               <h3 className="font-semibold text-2xl md:text-4xl my-2">
-                to play:
+                to move:
               </h3>
               <div className="flex gap-4">
                 <button
@@ -115,7 +115,7 @@ function App() {
                     if (toPlay !== "white") setToPlay("white");
                   }}
                   className={`bg-white text-black rounded-full h-12 w-12 text-center text-2xl md:text-4xl md:w-16 md:h-16 font-bold transition-all duration-200 border-4 ${
-                    toPlay === "white" ? " border-orange-500" : "border-white"
+                    toPlay === "white" ? " border-green-600" : "border-white"
                   }`}
                 >
                   W
@@ -126,7 +126,7 @@ function App() {
                     if (toPlay !== "black") setToPlay("black");
                   }}
                   className={`bg-black text-white rounded-full h-12 w-12 text-center text-2xl md:text-4xl md:w-16 md:h-16 font-bold transition-all duration-200 border-4 ${
-                    toPlay === "black" ? "border-orange-500" : "border-black"
+                    toPlay === "black" ? "border-green-600" : "border-black"
                   }`}
                 >
                   B
@@ -134,7 +134,7 @@ function App() {
               </div>
             </div>
             {/* prespective */}
-            <div className="prespective-div flex gap-10 items-center justify-between w-full">
+            <div className="prespective-div flex gap-10 items-center justify-center w-full">
               <h3 className="font-semibold text-2xl md:text-4xl my-2">
                 prespective:
               </h3>
@@ -145,7 +145,7 @@ function App() {
                   }}
                   className={`bg-white text-black rounded-full h-12 w-12 text-center text-2xl md:text-4xl md:w-16 md:h-16 font-bold transition-all duration-200 border-4 ${
                     prespective === "white"
-                      ? " border-orange-500"
+                      ? " border-green-600"
                       : "border-white"
                   }`}
                 >
@@ -158,7 +158,7 @@ function App() {
                   }}
                   className={`bg-black text-white rounded-full h-12 w-12 text-center text-2xl md:text-4xl md:w-16 md:h-16 font-bold transition-all duration-200 border-4 ${
                     prespective === "black"
-                      ? "border-orange-500"
+                      ? "border-green-600"
                       : "border-black"
                   }`}
                 >
@@ -174,48 +174,84 @@ function App() {
             >
               {loading ? <Spinner /> : "get FEN"}
             </button>
+            {fen && (
+              <div
+                className={`flex justify-center flex-col gap-4 items-center my-2 lg:mt-10 mb-4 mx-`}
+              >
+                <p
+                  className={`text-[0.64rem] lg:text-lg font-semibold bg-[var(--box-bg)] p-5 rounded-xl border-2 transition-all duration-300 ${
+                    copied ? "border-green-500" : "border-[var(--box-bg)]"
+                  }`}
+                  ref={fenRef}
+                >
+                  {fen}
+                </p>
+                <div className="flex flex-col gap-4 lg:flex-row">
+                  <div className="flex gap-10">
+                    <button
+                      title="chess.com Analysis"
+                      onClick={() => handleRedirect("chesscom")}
+                      style={{
+                        background:
+                          "url(https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/44/56/f5/4456f56e-2e15-075a-152b-1f2475de00d4/AppIcon-1x_U007epad-0-10-0-0-85-220-0.png/246x0w.webp)",
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        width: "60px",
+                        height: "60px",
+                      }}
+                      className="w-fit p-4 rounded-xl font-semibold lg:text-xl shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+                    ></button>
+
+                    <button
+                      title="lichess Analysis"
+                      style={{
+                        backgroundImage:
+                          "url(https://i.pinimg.com/236x/93/b9/2d/93b92d778aa95a38d0d42c5def9f3305.jpg?nii=t)",
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        width: "60px",
+                        height: "60px",
+                      }}
+                      onClick={() => handleRedirect("lichess")}
+                      className="bg-[var(--lichess-btn)] w-fit p-4 rounded-xl font-semibold lg:text-xl shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+                    ></button>
+                    <button
+                      title="copy"
+                      onClick={handleCopy}
+                      className="bg-orange-500 flex justify-center items-center w-[60px] h-[60px] rounded-xl font-semibold lg:text-xl shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35px"
+                        height="35px"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-copy-icon lucide-copy"
+                      >
+                        <rect
+                          width="14"
+                          height="14"
+                          x="8"
+                          y="8"
+                          rx="2"
+                          ry="2"
+                        />
+                        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
-
-      {fen && (
-        <div
-          className={`flex justify-center flex-col gap-4 items-center mt-6 lg:mt-0 mb-4`}
-        >
-          <p
-            className={`text-[0.64rem] lg:text-2xl font-semibold bg-[var(--box-bg)] p-5 rounded-xl border-2 transition-all duration-300 ${
-              copied ? "border-green-500" : "border-[var(--box-bg)]"
-            }`}
-            ref={fenRef}
-          >
-            {fen}
-          </p>
-          <div className="flex flex-col gap-4 lg:flex-row">
-            <div className="flex gap-4">
-              <button
-                onClick={() => handleRedirect("chesscom")}
-                className="bg-[var(--chessdotcom-btn)] w-fit p-4 rounded-xl font-semibold lg:text-xl shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                Chess.com Analysis
-              </button>
-              <button
-                onClick={() => handleRedirect("lichess")}
-                className="bg-[var(--lichess-btn)] w-fit p-4 rounded-xl font-semibold lg:text-xl shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                Lichess Analysis
-              </button>
-            </div>
-            <div className="flex gap-4 justify-center">
-              <button
-                onClick={handleCopy}
-                className="bg-orange-500 min-w-44 p-4 rounded-xl font-semibold lg:text-xl shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                Copy
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useRef } from "react";
 import cv from "@techstark/opencv-js";
-import boardPlaceHolder from "../public/board_placeholder.png";
+import boardPlaceHolder from "../../public/board_placeholder.png";
 
 function ImageProcessor({
   viewedBoard,

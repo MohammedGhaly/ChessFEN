@@ -54,7 +54,7 @@ function App() {
       if (!croppedBoard) return;
       fen = await imgToFen(croppedBoard, prespective, toPlay);
     } else {
-      fen = await imgToFen(board, prespective, toPlay);
+      fen = await imgToFen(resizeBoard(board), prespective, toPlay);
     }
     setFen(fen);
     setLoading(false);

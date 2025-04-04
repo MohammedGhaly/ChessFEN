@@ -118,8 +118,6 @@ export function contoursCropping(img, img_size = 400) {
   // Apply binary threshold (inverted)
   cv.threshold(gray, thresholded, 80, 255, cv.THRESH_BINARY);
 
-  // return thresholded;
-  // Find contours
   cv.findContours(
     thresholded,
     contours,
@@ -233,17 +231,3 @@ function matTo2DArray(mat) {
 
   return matrix;
 }
-
-// function delay(ms) {
-//   return new Promise((resolve) => setTimeout(resolve, ms));
-// }
-
-// function downloadJsonFile(filename, data) {
-//   const blob = new Blob([JSON.stringify(data, null, 2)], {
-//     type: "application/json",
-//   });
-//   const link = document.createElement("a");
-//   link.href = URL.createObjectURL(blob);
-//   link.download = filename;
-//   link.click();
-// }

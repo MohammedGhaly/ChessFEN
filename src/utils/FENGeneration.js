@@ -68,7 +68,6 @@ function getCastelingRights(matrix) {
 
 export async function imgToFen(img, prespective, turn) {
   const squares = getSquares(img);
-  // console.log("squares=> ", squares);
   let whitePrespectiveBoard = await getPrediction(squares);
   console.log("whitePrespectiveBoard=> ", whitePrespectiveBoard);
   let predictedBoard = [];
